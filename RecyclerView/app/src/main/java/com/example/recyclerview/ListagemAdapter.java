@@ -15,7 +15,7 @@ public class ListagemAdapter extends RecyclerView.Adapter<ListagemAdapter.WordVi
 
     private final LinkedList<String> mWordList;
     private final LayoutInflater mInflater;
-    
+
     public ListagemAdapter(Context context, LinkedList<String> wordList) {
         mInflater = LayoutInflater.from(context);
         this.mWordList = wordList;
@@ -24,7 +24,8 @@ public class ListagemAdapter extends RecyclerView.Adapter<ListagemAdapter.WordVi
     @NonNull
     @Override
     public WordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Finciona como o metodo Main
+        // Finciona como o metodo Main e tem a responsabilidade
+        // de informar ao adapter qual é o layout dos itens da lista.
 
         View mItemView = mInflater.inflate(
                 R.layout.item_list, parent, false);
@@ -39,10 +40,11 @@ public class ListagemAdapter extends RecyclerView.Adapter<ListagemAdapter.WordVi
 
     @Override
     public int getItemCount() {
+        // Informa ao adapter
         return this.mWordList.size();
     }
 
-    //Gerenciar itens
+    // faz a conexão dos itens do layout com o código
     class WordViewHolder extends RecyclerView.ViewHolder {
         public final TextView wordItemView;
         final ListagemAdapter mAdapter;
