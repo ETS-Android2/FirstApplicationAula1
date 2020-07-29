@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.LinkedList;
@@ -15,8 +17,10 @@ public class ListagemAdapter extends RecyclerView.Adapter<ListagemAdapter.WordVi
 
     private final LinkedList<String> mWordList;
     private final LayoutInflater mInflater;
+    public Context ctx;
 
     public ListagemAdapter(Context context, LinkedList<String> wordList) {
+        ctx = context;
         mInflater = LayoutInflater.from(context);
         this.mWordList = wordList;
     }
@@ -35,6 +39,7 @@ public class ListagemAdapter extends RecyclerView.Adapter<ListagemAdapter.WordVi
 
     @Override
     public void onBindViewHolder(@NonNull WordViewHolder holder, int position) {
+        // Diz pro layout qual o conteúdo que os itens dele vão ter
         holder.wordItemView.setText(mWordList.get(position));
     }
 
@@ -45,7 +50,7 @@ public class ListagemAdapter extends RecyclerView.Adapter<ListagemAdapter.WordVi
     }
 
     // faz a conexão dos itens do layout com o código
-    class WordViewHolder extends RecyclerView.ViewHolder {
+    class WordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final TextView wordItemView;
         final ListagemAdapter mAdapter;
 
@@ -53,10 +58,21 @@ public class ListagemAdapter extends RecyclerView.Adapter<ListagemAdapter.WordVi
             super(itemView);
 
             wordItemView = itemView.findViewById(R.id.itemLista);
+            ConstraintLayout container = itemView.findViewById(R.id.paiDeTodos);
+
+            wordItemView.setOnClickListener(this);
 
             this.mAdapter = adapter;
         }
 
+        @Override
+        public void onClick(View v) {
+            if (v.getId() == R.id.itemLista) {
+                Toast.makeText(ctx, "Item foi clicado", Toast.LENGTH_LONG).show();
+            } else if(v.getId() == R.id.paiDeTodos) {
+                // Executar alguma coisa
+            }
+        }
     }
 
 }
