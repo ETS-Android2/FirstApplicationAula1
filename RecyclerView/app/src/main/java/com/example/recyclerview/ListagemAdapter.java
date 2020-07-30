@@ -1,77 +1,79 @@
 package com.example.recyclerview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.recyclerview.models.Receitas;
+
 import java.util.LinkedList;
 
-public class ListagemAdapter extends RecyclerView.Adapter<ListagemAdapter.WordViewHolder> {
+public class ListagemAdapter extends RecyclerView.Adapter<ListagemAdapter.ReceitaHolder> {
 
-    private final LinkedList<String> mWordList;
+    private Context context;
+    private LinkedList<Receitas> listaDeReceitas;
+
     private final LayoutInflater mInflater;
-    public Context ctx;
 
-    public ListagemAdapter(Context context, LinkedList<String> wordList) {
-        ctx = context;
+    public ListagemAdapter(Context context, LinkedList listaDeReceitas) {
+        this.context = context;
+        this.listaDeReceitas = listaDeReceitas;
         mInflater = LayoutInflater.from(context);
-        this.mWordList = wordList;
     }
 
     @NonNull
     @Override
-    public WordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Finciona como o metodo Main e tem a responsabilidade
-        // de informar ao adapter qual é o layout dos itens da lista.
+    public ReceitaHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View mItemView = mInflater.inflate(
-                R.layout.item_list, parent, false);
+        View itemView = mInflater.inflate(R.layout.item_list, parent, false);
 
-        return new WordViewHolder(mItemView, this);
+        return new ReceitaHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WordViewHolder holder, int position) {
-        // Diz pro layout qual o conteúdo que os itens dele vão ter
-        holder.wordItemView.setText(mWordList.get(position));
+    public void onBindViewHolder(@NonNull ReceitaHolder holder, int position) {
+
+        Receitas receita = listaDeReceitas.get(position);
+
+        String titulo = receita.getName();
+        String mensagem = receita.getDescription();
+
+        holder.mTitulo.setText(titulo);
+        holder.mMensagem.setText(mensagem);
     }
 
     @Override
     public int getItemCount() {
-        // Informa ao adapter
-        return this.mWordList.size();
+        return listaDeReceitas.size();
     }
 
-    // faz a conexão dos itens do layout com o código
-    class WordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public final TextView wordItemView;
-        final ListagemAdapter mAdapter;
+    class ReceitaHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public WordViewHolder(View itemView, ListagemAdapter adapter) {
+        public TextView mTitulo;
+        public TextView mMensagem;
+        public ConstraintLayout mComponentePai;
+
+        public ReceitaHolder(@NonNull View itemView) {
             super(itemView);
 
-            wordItemView = itemView.findViewById(R.id.itemLista);
-            ConstraintLayout container = itemView.findViewById(R.id.paiDeTodos);
+            mTitulo = itemView.findViewById(R.id.titulo);
+            mMensagem = itemView.findViewById(R.id.mensagem);
+            mComponentePai = itemView.findViewById(R.id.componente_pai);
 
-            wordItemView.setOnClickListener(this);
-
-            this.mAdapter = adapter;
+            mComponentePai.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            if (v.getId() == R.id.itemLista) {
-                Toast.makeText(ctx, "Item foi clicado", Toast.LENGTH_LONG).show();
-            } else if(v.getId() == R.id.paiDeTodos) {
-                // Executar alguma coisa
-            }
+            Intent intent = new Intent(context, DetalhesActivity.class);
+            context.startActivity(intent);
         }
     }
 

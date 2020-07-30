@@ -2,6 +2,7 @@ package com.example.recyclerview;
 
 import android.os.Bundle;
 
+import com.example.recyclerview.models.Receitas;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -21,7 +22,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private LinkedList<String> lista = new LinkedList<>();
+    private LinkedList<Receitas> listaDeReceitas = new LinkedList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,31 +31,18 @@ public class MainActivity extends AppCompatActivity {
 //        Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
-        lista.add("palavra 1");
-        lista.add("palavra 2");
-        lista.add("palavra 3");
-        lista.add("palavra 4");
-        lista.add("palavra 5");
-        lista.add("palavra 5");
-        lista.add("Fim");
+        listaDeReceitas.add(new Receitas("Pao", "Quentinho bla bla bla bla bla bla bla"));
+        listaDeReceitas.add(new Receitas("Sonho", "Gostoso bla bla bla bla bla bla bla"));
+        listaDeReceitas.add(new Receitas("Pipoca", "Quentinho bla bla bla bla bla bla bla"));
+        listaDeReceitas.add(new Receitas("Ruffles", "Churrasco bla bla bla bla bla bla bla"));
+        listaDeReceitas.add(new Receitas("Manteiga", "Quentinho bla bla bla bla bla bla bla"));
+        listaDeReceitas.add(new Receitas("Coco", "Gelado bla bla bla bla bla bla bla"));
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        ListagemAdapter adapter = new ListagemAdapter(this, listaDeReceitas);
 
-        ListagemAdapter adapter = new ListagemAdapter(this, lista);
         recyclerView.setAdapter(adapter);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this)); // Vertical
 
     }
 }
-
-
-
-//    FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//@Override
-//public void onClick(View view) {
-//        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//        .setAction("Action", null).show();
-//        }
-//        });

@@ -38,12 +38,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun requestPersonRetrofit() {
         val number = (0..30).random()
-        RequestRetrofit.person(number.toString(), {
+        RequestRetrofit.person(number.toString()) {
             val item = it as Person
             val id = instancia.personDao().insert(item)
             updateList(id)
             Toast.makeText(this, item.name, Toast.LENGTH_LONG).show()
-        })
+        }
     }
 
     fun ClosedRange<Int>.random() =
