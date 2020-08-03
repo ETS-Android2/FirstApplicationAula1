@@ -54,6 +54,7 @@ public class ListagemAdapter extends RecyclerView.Adapter<ListagemAdapter.Receit
         return listaDeReceitas.size();
     }
 
+    public static final String DETALHES_KEY = "Receita";
     class ReceitaHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView mTitulo;
@@ -73,6 +74,7 @@ public class ListagemAdapter extends RecyclerView.Adapter<ListagemAdapter.Receit
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(context, DetalhesActivity.class);
+            intent.putExtra(DETALHES_KEY, listaDeReceitas.get(getLayoutPosition()));
             context.startActivity(intent);
         }
     }

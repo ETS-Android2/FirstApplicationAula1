@@ -1,6 +1,8 @@
 package com.example.recyclerview.models;
 
-public class Receitas {
+import java.io.Serializable;
+
+public class Receitas implements Serializable {
 
     public Receitas(String name, String description) {
         this.name = name;
