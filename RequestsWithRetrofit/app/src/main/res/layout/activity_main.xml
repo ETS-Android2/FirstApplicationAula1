@@ -6,16 +6,14 @@
     android:orientation="vertical"
     android:padding="50dp"
     android:layout_width="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".view.MainActivity">
 
     <EditText
-        android:digits="0123456789"
         android:layout_height="wrap_content"
         android:hint="CEP"
         android:id="@+id/etMain_cep"
         android:textColor="#595959"
         android:textSize="25sp"
-        android:inputType="number"
         android:layout_width="match_parent"/>
 
     <LinearLayout

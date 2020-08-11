@@ -33,7 +33,7 @@ public class DevRepository {
 
     public void getDevs(String name, final RequestResult requestResult) {
 
-        Call<DevMessage> call = new RetrofitConfig().getDevServer().getDevs(name);
+        Call<DevMessage> call = new RetrofitConfig().getDevServer().getMessage(name);
         call.enqueue(new Callback<DevMessage>() {
             @Override
             public void onResponse(Call<DevMessage> call, Response<DevMessage> response) {
@@ -68,6 +68,25 @@ public class DevRepository {
     public void addDev(String userName ,final RequestResult requestResult) {
 
         Call<Desenvolvedor> call = new RetrofitConfig().getDevServer().add(new DevRequest(userName));
+
+        call.enqueue(new Callback<Desenvolvedor>() {
+            @Override
+            public void onResponse(Call<Desenvolvedor> call, Response<Desenvolvedor> response) {
+                Desenvolvedor dev = response.body();
+                requestResult.returnSuccess(dev);
+            }
+
+            @Override
+            public void onFailure(Call<Desenvolvedor> call, Throwable t) {
+                requestResult.returnError("Deu erro na requisição! Error message: \n" + t.getMessage());
+            }
+        });
+
+    }
+
+    public void getUserProfile(String username, final RequestResult requestResult) {
+
+        Call<Desenvolvedor> call = new RetrofitConfig().getDevServer().getDevByUsername(username);
 
         call.enqueue(new Callback<Desenvolvedor>() {
             @Override

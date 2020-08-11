@@ -15,7 +15,6 @@ public class RetrofitConfig {
 
     public RetrofitConfig() {
 
-
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
                 .connectTimeout(60, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS)
@@ -23,8 +22,8 @@ public class RetrofitConfig {
                 .build();
 
         this.retrofit = new Retrofit.Builder()
-//                .baseUrl("https://exampletindev-backend.herokuapp.com/")
-                .baseUrl("https://viacep.com.br/ws/")
+                .baseUrl("https://exampletindev-backend.herokuapp.com/")
+//                .baseUrl("https://viacep.com.br/ws/")
                 .client(okHttpClient)
                 .addConverterFactory(JacksonConverterFactory.create())
                 .build();

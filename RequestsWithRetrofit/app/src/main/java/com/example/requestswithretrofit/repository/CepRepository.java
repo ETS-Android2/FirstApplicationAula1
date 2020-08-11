@@ -10,9 +10,11 @@ import retrofit2.Response;
 
 public class CepRepository {
 
+    // Logica de negocio, banco de dados, requisiçoes
+
     public void buscarCep(String cep, final RequestResult requestResult) {
 
-        Call<CEP> call = new RetrofitConfig().getCEPService().buscarCep(cep);
+        Call<CEP> call = new RetrofitConfig().getCEPService().buscarCep("53040000");
 
         call.enqueue(new Callback<CEP>() {
             @Override

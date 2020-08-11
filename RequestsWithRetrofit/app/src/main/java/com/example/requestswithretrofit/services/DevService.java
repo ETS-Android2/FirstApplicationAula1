@@ -21,7 +21,7 @@ public interface DevService {
     Call<List<Desenvolvedor>> getAllDevs();
 
     @GET("/")
-    Call<DevMessage> getDevs(@Query("name") String name);
+    Call<DevMessage> getMessage(@Query("name") String name);
 
     @GET("devs")
     Call<List<Desenvolvedor>> getDevsByLike(@Header("user") String userid);
@@ -29,4 +29,7 @@ public interface DevService {
     @Headers("Content-Type: application/json")
     @POST("devs")
     Call<Desenvolvedor> add(@Body DevRequest devRequest);
+
+    @GET("devs/profile")
+    Call<Desenvolvedor> getDevByUsername(@Header("username") String username);
 }

@@ -33,9 +33,9 @@
 22        android:testOnly="true"
 23        android:theme="@style/AppTheme" >
 23-->C:\Projects\FirstApplicationAula1\RequestsWithRetrofit\app\src\main\AndroidManifest.xml:13:9-40
-24        <activity android:name="com.example.requestswithretrofit.MainActivity" >
+24        <activity android:name="com.example.requestswithretrofit.view.MainActivity" >
 24-->C:\Projects\FirstApplicationAula1\RequestsWithRetrofit\app\src\main\AndroidManifest.xml:14:9-20:20
-24-->C:\Projects\FirstApplicationAula1\RequestsWithRetrofit\app\src\main\AndroidManifest.xml:14:19-47
+24-->C:\Projects\FirstApplicationAula1\RequestsWithRetrofit\app\src\main\AndroidManifest.xml:14:19-52
 25            <intent-filter>
 25-->C:\Projects\FirstApplicationAula1\RequestsWithRetrofit\app\src\main\AndroidManifest.xml:15:13-19:29
 26                <action android:name="android.intent.action.MAIN" />
