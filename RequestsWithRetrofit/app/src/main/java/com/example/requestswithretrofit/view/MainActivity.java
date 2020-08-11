@@ -1,4 +1,4 @@
-package com.example.requestswithretrofit;
+package com.example.requestswithretrofit.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,13 +8,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.requestswithretrofit.R;
+import com.example.requestswithretrofit.RequestResult;
 import com.example.requestswithretrofit.model.CEP;
 import com.example.requestswithretrofit.model.Desenvolvedor;
 import com.example.requestswithretrofit.model.DevMessage;
 import com.example.requestswithretrofit.repository.CepRepository;
 import com.example.requestswithretrofit.repository.DevRepository;
+import com.example.requestswithretrofit.services.RetrofitConfig;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
         btnBuscarCep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cepRepository.buscarCep(cep.getText().toString(), resultListener);
+//                cepRepository.buscarCep(cep.getText().toString(), resultListener);
+                devRepository.getUserProfile(cep.getText().toString(), resultListener);
             }
         });
     }
@@ -46,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public <T> void returnSuccess(T cep) {
-                CEP cep1 = (CEP) cep;
-                resposta.setText(cep1.toString());
+                Desenvolvedor dev = (Desenvolvedor) cep;
+                resposta.setText(dev.getName());
             }
 
             @Override

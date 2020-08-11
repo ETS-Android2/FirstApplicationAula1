@@ -1,14 +1,22 @@
-package com.example.searchcep;
+package com.example.searchcep.model;
+
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-@JsonIgnoreProperties({"createdAt","updatedAt","__v"})
-public class Dev {
+@Entity(tableName = "Desenvolvedor")
+@JsonIgnoreProperties({"uid","createdAt","updatedAt","__v"})
+public class Dev implements Serializable {
 
-    ArrayList<String> likes = new ArrayList();
-    ArrayList<String> dislikes = new ArrayList();
+    @PrimaryKey(autoGenerate = true) private int uid;
+    private ArrayList<String> likes = new ArrayList();
+    private ArrayList<String> dislikes = new ArrayList();
+    @ColumnInfo(name="server_id")
     private String _id;
     private String name;
     private String user;
@@ -69,6 +77,14 @@ public class Dev {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     @Override
